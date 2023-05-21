@@ -35,3 +35,5 @@ C:\Users\Yago Militao\source\repos\Pokedex\Pokedex\bin\Debug\net7.0\Newtonsoft.J
 C:\Users\Yago Militao\source\repos\Pokedex\Pokedex\bin\Debug\net7.0\Serilog.dll
 C:\Users\Yago Militao\source\repos\Pokedex\Pokedex\bin\Debug\net7.0\Serilog.Sinks.Console.dll
 C:\Users\Yago Militao\source\repos\Pokedex\Pokedex\bin\Debug\net7.0\Serilog.Sinks.File.dll
+C:\Users\Yago Militao\source\repos\Pokedex\Pokedex\bin\Debug\net7.0\RestSharp.dll
+C:\Users\Yago Militao\source\repos\Pokedex\Pokedex\bin\Debug\net7.0\RestSharp.Serializers.Newtonsoft.Json.dll

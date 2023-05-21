@@ -25,69 +25,95 @@ namespace Pokedex.Controllers
             return pokemons;
         }
 
+        // Método GET que retorna o pokemon capturado com o ID especificado
         [HttpGet("{id}")]
         public ActionResult<PokemonModel> Get(int id)
         {
+            // Busca o pokemon capturado com o ID especificado na lista de pokemons capturados
             var pokemon = pokemons.FirstOrDefault(p => p.Id == id);
+
+            // Se o pokemon não for encontrado, retorna um erro 404 (Not Found)
             if (pokemon == null)
+                if (pokemon == null)
             {
                 return NotFound();
             }
             return pokemon;
         }
+
+        // Método POST que adiciona um novo pokemon capturado na lista
         [HttpPost]
         public async Task<ActionResult<PokemonModel>> Post(PokemonModel pokemon)
         {
-            // buscar dados do pokemon na PokeAPI
-            var response = await client.GetAsync(pokeApiUrl + pokemon.Numero);
+
+            // Buscar dados do pokemon na PokeAPI
+            var response = await client.GetAsync(pokeApiUrl + pokemon.Number);
             if (response.IsSuccessStatusCode)
             {
+                Console.WriteLine(response.ToString());
                 var responseString = await response.Content.ReadAsStringAsync();
                 var pokemonData = JsonConvert.DeserializeObject<JObject>(responseString);
+                
+                if (pokemonData != null)
+                {
+                    // preencher dados do pokemon capturado com os dados da PokeAPI
+                    pokemon.Name = pokemonData["name"].ToString();
+                    pokemon.Type = pokemonData["types"].Select(t => t["type"]["name"].ToString()).ToArray();
+                    await pokemon.ObtainType();
+                    await pokemon.ObtainWeakness();
 
-                // preencher dados do pokemon capturado com os dados da PokeAPI
-                pokemon.Nome = pokemonData["name"].ToString();
-                pokemon.Tipo = pokemonData["types"].Select(t => t["type"]["name"].ToString()).ToArray();
+                    pokemon.Id = pokemons.Count + 1;
+                    pokemons.Add(pokemon);
+                    // Retorna um código 201 (Created) com o novo pokemon capturado no corpo da resposta
+                    return CreatedAtAction(nameof(Get), new { id = pokemon.Id }, pokemon);
+                }
+                else
+                {
+                    return NotFound($"Pokemon '{pokemon.Name}' not found.");
+                }
+                
             }
             else
             {
-                return BadRequest();
+                return BadRequest($"Could not find pokemon with number {pokemon.Number}.");
             }
 
-            pokemon.Id = pokemons.Count + 1;
-            pokemons.Add(pokemon);
-
-            return CreatedAtAction(nameof(Get), new { id = pokemon.Id }, pokemon);
+            
         }
 
-        /*[HttpPut("{id}")]
+        // Método PUT que atualiza os dados de um pokemon capturado com o ID especificado
+        [HttpPut("{id}")]
         public ActionResult<PokemonModel> Put(int id, PokemonModel pokemon)
         {
+            // Busca o pokemon capturado com o ID especificado na lista de pokemons capturados
             var pokemonIndex = pokemons.FindIndex(p => p.Id == id);
+
+            // Se o pokemon não for encontrado, retorna uma exception
             if (pokemonIndex == -1)
             {
-                {
                     throw new Exception($"Pokemon with ID {id} not found.");
-                }
-
-                pokemons[pokemonIndex] = pokemon;
-
-                return NoContent();
             }
-            //Adicionando um retorno padrão no final do método
-            return BadRequest();
-        }*/
+            else
+            {
+                // Atualiza os dados do pokemon capturado com os dados enviados na requisição
+                return pokemons[pokemonIndex] = pokemon;
 
+            }
+        }
+
+        // Método DELETE que remove o pokemon capturado com o ID especificado da lista
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
+            // Busca o pokemon capturado com o ID especificado na lista de pokemons capturados
             var pokemonIndex = pokemons.FindIndex(p => p.Id == id);
+
             if (pokemonIndex == -1)
             {
-            return NotFound();
+                return NotFound();
             }
             pokemons.RemoveAt(pokemonIndex);
-            return NoContent();
+                return NoContent();
             }
     }
 }
