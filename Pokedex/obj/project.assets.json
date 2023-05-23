@@ -829,19 +829,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Yago Militao\\.nuget\\packages\\": {}
+    "C:\\Users\\yluizmi\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Yago Militao\\source\\repos\\Pokedex\\Pokedex\\Pokedex.csproj",
+      "projectUniqueName": "C:\\Users\\yluizmi\\Desktop\\Projects\\Estudo\\ApiPokedex\\Pokedex\\Pokedex.csproj",
       "projectName": "Pokedex",
-      "projectPath": "C:\\Users\\Yago Militao\\source\\repos\\Pokedex\\Pokedex\\Pokedex.csproj",
-      "packagesPath": "C:\\Users\\Yago Militao\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Yago Militao\\source\\repos\\Pokedex\\Pokedex\\obj\\",
+      "projectPath": "C:\\Users\\yluizmi\\Desktop\\Projects\\Estudo\\ApiPokedex\\Pokedex\\Pokedex.csproj",
+      "packagesPath": "C:\\Users\\yluizmi\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\yluizmi\\Desktop\\Projects\\Estudo\\ApiPokedex\\Pokedex\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Yago Militao\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\yluizmi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -849,7 +854,9 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "https://api.nuget.org/v3/index.json": {}
+        "C:\\Program Files\\dotnet\\library-packs": {},
+        "https://api.nuget.org/v3/index.json": {},
+        "https://artifactory.trimble.tools/artifactory/api/nuget/tcx-shared-nuget": {}
       },
       "frameworks": {
         "net7.0": {
